@@ -11,7 +11,7 @@ namespace :xmlstats do
       team.save!
     end
 
-    sleep 10.0 # max 6 per minute
+    sleep 1.0 while Xmlstats.limit_remaining == 0 && Xmlstats.limit_reset_time >= Time.now
   end
 
   task :current_events => %i( environment teams ) do
@@ -33,7 +33,7 @@ namespace :xmlstats do
         event.save!
       end
 
-      sleep 10.0 # max 6 per minute
+      sleep 1.0 while Xmlstats.limit_remaining == 0 && Xmlstats.limit_reset_time >= Time.now
     end
   end
 
