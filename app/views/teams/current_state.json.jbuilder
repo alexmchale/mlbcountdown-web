@@ -17,4 +17,5 @@ json.game do
   json.time       @event.time.iso8601
   json.home_score @event.home_score
   json.away_score @event.away_score
+  json.verb       @event.home_team == @team ? "vs" : "at"
 end
