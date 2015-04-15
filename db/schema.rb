@@ -11,9 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150415003437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "home_team_id"
+    t.integer  "away_team_id"
+    t.datetime "time"
+    t.string   "state"
+    t.integer  "home_score"
+    t.integer  "away_score"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "events", ["away_team_id"], name: "index_events_on_away_team_id", using: :btree
+  add_index "events", ["home_team_id"], name: "index_events_on_home_team_id", using: :btree
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "abbreviation"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
 end
